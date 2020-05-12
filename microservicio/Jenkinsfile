@@ -29,6 +29,7 @@ pipeline {
 		}
 		stage('Clean project') {
 			steps {
+				sh 'chmod +x comun/gradlew'
 				echo "-------------------->Clean project<--------------------"
 				dir("microservicio") {
 					sh '../comun/gradlew clean'
