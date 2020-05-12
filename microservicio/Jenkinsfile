@@ -1,0 +1,39 @@
+pipeline {
+	agent {
+		label 'Slave_Induccion'
+	}
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '3'))
+		disableConcurrentBuilds()
+	}
+	tools {
+		jdk 'JDK13_Centos'
+	}
+	stages{
+		stage('Checkout') {
+			steps {
+				echo "-------------------->Checkout<--------------------"
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/develop']], 
+					doGenerateSubmoduleConfigurations: false, 
+					extensions: [], 
+					gitTool: 'Default', 
+					submoduleCfg: [], 
+					userRemoteConfigs: [[
+						credentialsId: 'GitHub_mateoortizcano', 
+						url:'https://github.com/mateoortizcano/ADNLiderTecnico.git'
+					]]
+				])
+			}
+		}
+		stage('Clean project') {
+			steps {
+				echo "-------------------->Checkout<--------------------"
+				dir("$comun") {
+					sh 'chmod +x ./gradlew clean'
+				}
+			}
+		}
+	}
+}
