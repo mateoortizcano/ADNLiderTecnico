@@ -31,8 +31,23 @@ pipeline {
 			steps {
 				echo "-------------------->Clean project<--------------------"
 				dir("microservicio") {
-					sh 'chmod +x ../comun/gradlew'
 					sh '../comun/gradlew clean'
+				}
+			}
+		}
+		stage('Compile project') {
+			steps {
+				echo "-------------------->Compile project<--------------------"
+				dir("microservicio") {
+					sh '../comun/gradlew build -x test -x bootJar'
+				}
+			}
+		}
+		stage('Test project and code coverage') {
+			steps {
+				echo "-------------------->Test project and code coverage<--------------------"
+				dir("microservicio") {
+					sh '../comun/gradlew test jacocoTestReport'
 				}
 			}
 		}
