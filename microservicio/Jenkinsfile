@@ -30,7 +30,7 @@ pipeline {
 		stage('Clean project') {
 			steps {
 				echo "-------------------->Clean project<--------------------"
-				dir("$comun") {
+				dir("comun") {
 					sh 'chmod +x ./gradlew clean'
 				}
 			}
