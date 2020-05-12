@@ -30,9 +30,9 @@ pipeline {
 		stage('Clean project') {
 			steps {
 				echo "-------------------->Clean project<--------------------"
-				dir("comun") {
-					sh 'chmod +x ./gradlew'
-					sh './gradlew clean'
+				dir("microservicio") {
+					sh 'chmod +x ../comun/gradlew'
+					sh '../comun/gradlew clean'
 				}
 			}
 		}
