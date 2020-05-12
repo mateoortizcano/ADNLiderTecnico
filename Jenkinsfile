@@ -56,7 +56,7 @@ pipeline {
 			steps{
 				echo '-------------------->Sonar analysis<--------------------'
 				  withSonarQubeEnv('Sonar') {
-					sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:adn.mateo.ortiz.backend -Dsonar.projectName=Ceiba-ADN(mateo.ortiz).Backend -Dproject.settings=./sonar-project.properties"
+					sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:adn.mateo.ortiz.backend -Dsonar.projectName=Ceiba-ADN\(mateo.ortiz\).Backend -Dproject.settings=./sonar-project.properties"
 				 }
 			}
 		}
