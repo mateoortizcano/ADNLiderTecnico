@@ -33,7 +33,11 @@ dependencies {
 	implementation project(':comun:comun-aplicacion')
 }
 
-jacocoTestReport {reports {xml.enabled true}}
+jacocoTestReport {
+	reports {xml.enabled true}
+	additionalSourceDirs files("../aplicacion/src/main/java")
+	additionalClassDirs files("../aplicacion/build/classes/java/main")
+}
 
 test {
 	finalizedBy jacocoTestReport
