@@ -22,6 +22,8 @@ dependencies {
 	runtimeOnly project.ext.db
 	testImplementation project.ext.flywaytest
 
+	compileOnly project.ext.lombok
+	annotationProcessor project.ext.lombok
 	
 	implementation project(':dominio')
 	implementation project(':aplicacion')

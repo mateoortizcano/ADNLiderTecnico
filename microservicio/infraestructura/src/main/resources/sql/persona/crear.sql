@@ -1,0 +1,2 @@
+INSERT INTO personas (nombre, apellido, edad, tipo_documento_id, numero_documento)
+VALUES (:nombre, :apellido, :edad, (select id from tipo_documento where nombre = :tipo_documento), :numero_documento);

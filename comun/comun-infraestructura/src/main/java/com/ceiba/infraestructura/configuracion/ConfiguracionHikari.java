@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @ConfigurationProperties(prefix = "spring.datasource")
@@ -23,5 +25,10 @@ public class ConfiguracionHikari extends HikariConfig {
         setMaximumPoolSize(poolSize);
         setPoolName(this.poolName);
         return new HikariDataSource(this);
-    } 
+    }
+
+    @Bean
+    PlatformTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
 }
