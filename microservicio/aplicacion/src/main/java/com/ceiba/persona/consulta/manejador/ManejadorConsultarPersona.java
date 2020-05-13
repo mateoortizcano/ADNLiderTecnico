@@ -1,7 +1,6 @@
 package com.ceiba.persona.consulta.manejador;
 
 import com.ceiba.persona.modelo.dto.DtoPersona;
-import com.ceiba.persona.puerto.DaoPersona;
 import com.ceiba.persona.servicio.ServicioConsultarPersona;
 import org.springframework.stereotype.Component;
 

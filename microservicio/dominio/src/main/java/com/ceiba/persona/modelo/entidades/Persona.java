@@ -45,7 +45,7 @@ public class Persona {
 
     private boolean tipoDelDocumentoIdentidadEsIgualA(DocumentoDeIdentidad documentoDeIdentidad,
                                                       TipoDocumentoDeIdentidad enumTipoDocumento) {
-        return enumTipoDocumento.name().equals(documentoDeIdentidad.getTipo().toUpperCase());
+        return enumTipoDocumento.name().equalsIgnoreCase(documentoDeIdentidad.getTipo());
     }
 
     public String getNombre() {

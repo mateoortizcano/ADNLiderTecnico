@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Repository
@@ -33,16 +34,16 @@ public class DaoPersonaMySql implements DaoPersona {
     }
 
     @Override
-    public DtoPersona consultarConDocumentoDeIdentidad(String tipoDocumento, String numeroDocumento) {
+    public Optional<DtoPersona> consultarConDocumentoDeIdentidad(String tipoDocumento, String numeroDocumento) {
         MapSqlParameterSource parametrosSql = new MapSqlParameterSource();
         parametrosSql.addValue("tipo_documento", tipoDocumento);
         parametrosSql.addValue("numero_documento", numeroDocumento);
         try {
-            return customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(
-                    sqlConsultarPorDocumentoDeIdentidad, parametrosSql, new MapeadorPersona());
+            return Optional.of(customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(
+                    sqlConsultarPorDocumentoDeIdentidad, parametrosSql, new MapeadorPersona()));
         } catch (EmptyResultDataAccessException excepcion) {
-            log.error("No se encontró ninguna persona con esa identificación");
-            return null;
+            log.error("No se encontró ninguna persona con esa identificación", excepcion);
+            return Optional.empty();
         }
     }
 }

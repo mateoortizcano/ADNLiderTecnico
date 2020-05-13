@@ -3,6 +3,7 @@ package com.ceiba.persona.puerto;
 import com.ceiba.persona.modelo.dto.DtoPersona;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DaoPersona {
 
@@ -19,5 +20,5 @@ public interface DaoPersona {
      * @param numeroDocumento
      * @return
      */
-    DtoPersona consultarConDocumentoDeIdentidad(String tipoDocumento, String numeroDocumento);
+    Optional<DtoPersona> consultarConDocumentoDeIdentidad(String tipoDocumento, String numeroDocumento);
 }

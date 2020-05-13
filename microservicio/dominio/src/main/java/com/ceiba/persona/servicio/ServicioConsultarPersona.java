@@ -18,10 +18,8 @@ public class ServicioConsultarPersona {
     public DtoPersona ejecutar(String tipoDocumento, String numeroDocumento) {
         ValidadorArgumento.validarObligatorio(tipoDocumento, EL_TIPO_DE_DOCUMENTO_ES_OBLIGATORIO);
         ValidadorArgumento.validarObligatorio(numeroDocumento, EL_NUMERO_DE_DOCUMENTO_ES_OBLIGATORIO);
-        DtoPersona persona = this.daoPersona.consultarConDocumentoDeIdentidad(tipoDocumento, numeroDocumento);
-        if (persona == null) {
-            throw new ExcepcionSinDatos(NO_SE_ENCONTRO_NINGUNA_PERSONA_CON_ESA_IDENTIFICACION);
-        }
-        return persona;
+        return this.daoPersona.consultarConDocumentoDeIdentidad(tipoDocumento, numeroDocumento).orElseThrow(
+                () -> new ExcepcionSinDatos(NO_SE_ENCONTRO_NINGUNA_PERSONA_CON_ESA_IDENTIFICACION)
+        );
     }
 }

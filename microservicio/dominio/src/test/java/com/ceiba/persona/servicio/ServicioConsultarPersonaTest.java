@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static com.ceiba.BasePrueba.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +45,7 @@ public class ServicioConsultarPersonaTest {
     public void cuandoNohayPersonasEntoncesArrojaExcepcion() {
         String tipoDocumento = "CC";
         String numeroDocumento = "123";
-        when(daoPersona.consultarConDocumentoDeIdentidad(tipoDocumento, numeroDocumento)).thenReturn(null);
+        when(daoPersona.consultarConDocumentoDeIdentidad(tipoDocumento, numeroDocumento)).thenReturn(Optional.empty());
         assertThrows(() -> servicioConsultarPersona.ejecutar(tipoDocumento, numeroDocumento),
                 ExcepcionSinDatos.class, "No se encontró ninguna persona con esa identificación");
     }
