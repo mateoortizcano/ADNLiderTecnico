@@ -31,8 +31,8 @@ public class DaoPersonaMySql implements DaoPersona {
 
     @Override
     public List<DtoPersona> listar(Integer offset, Integer rowCount) {
-        offset = ((offset == null) || (offset <= 0)) ? NUMERO_REGISTRO_INICIAL_POR_DEFECTO : offset-1;
-        rowCount = ((rowCount == null) || (rowCount < 0)) ? NUMERO_DE_RESULTADOS_POR_DEFECTO : rowCount;
+        offset = (offset == null) || (offset <= 0) ? NUMERO_REGISTRO_INICIAL_POR_DEFECTO : (offset-1);
+        rowCount = (rowCount == null) || (rowCount < 0) ? NUMERO_DE_RESULTADOS_POR_DEFECTO : rowCount;
         MapSqlParameterSource parametrosSql = new MapSqlParameterSource();
         parametrosSql.addValue("offset", offset);
         parametrosSql.addValue("row_count", rowCount);
