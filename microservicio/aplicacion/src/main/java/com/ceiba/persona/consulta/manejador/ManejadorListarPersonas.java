@@ -14,7 +14,7 @@ public class ManejadorListarPersonas {
         this.daoPersona = daoPersona;
     }
 
-    public List<DtoPersona> ejecutar() {
-        return this.daoPersona.listar();
+    public List<DtoPersona> ejecutar(Integer numeroRegistroInicial, Integer numeroRegistros) {
+        return this.daoPersona.listar(numeroRegistroInicial, numeroRegistros);
     }
 }

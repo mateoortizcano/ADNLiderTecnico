@@ -8,17 +8,21 @@ import java.util.Optional;
 public interface DaoPersona {
 
     /**
-     * Permite listar personas
+     * Permite listar personas de manera paginada
      *
+     * @param numeroRegistroInicial
+     * @param numeroRegistros
      * @return
      */
-    List<DtoPersona> listar();
+    List<DtoPersona> listar(Integer numeroRegistroInicial, Integer numeroRegistros);
 
     /**
      * Permite consultar personas por el documento de identidad
+     *
      * @param tipoDocumento
      * @param numeroDocumento
      * @return
      */
     Optional<DtoPersona> consultarConDocumentoDeIdentidad(String tipoDocumento, String numeroDocumento);
+
 }

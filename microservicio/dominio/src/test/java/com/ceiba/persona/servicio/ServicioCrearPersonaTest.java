@@ -1,15 +1,34 @@
 package com.ceiba.persona.servicio;
 
-import static com.ceiba.BasePrueba.assertThrows;
+import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.persona.modelo.entidades.DocumentoDeIdentidad;
+import com.ceiba.persona.modelo.entidades.Persona;
+import com.ceiba.persona.puerto.RepositorioPersona;
 import com.ceiba.persona.servicio.testDataBuilder.DocumentoDeIdentidadTestDataBuilder;
 import com.ceiba.persona.servicio.testDataBuilder.PersonaTestDataBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import static com.ceiba.BasePrueba.assertThrows;
 
 public class ServicioCrearPersonaTest {
+
+    @InjectMocks
+    private ServicioCrearPersona servicioCrearPersona;
+    @Mock
+    private RepositorioPersona repositorioPersona;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void validarNombrePersonaNoNulo() {
@@ -115,4 +134,16 @@ public class ServicioCrearPersonaTest {
         assertThrows(personaTestDataBuilder::build, ExcepcionValorInvalido.class, "La edad no corresponde con el tipo de documento");
     }
 
+    @Test
+    public void verificarExistenciaPreviaPersona() {
+        String tipo = "CC";
+        String numero = "123456789";
+        DocumentoDeIdentidad documentoDeIdentidad = new DocumentoDeIdentidadTestDataBuilder()
+                .conTipo(tipo).conNumero(numero).build();
+        Persona persona = new PersonaTestDataBuilder().conEdad(19)
+                .conDocumentoDeIdentidad(documentoDeIdentidad).build();
+        Mockito.when(repositorioPersona.existeConDocumentoDeIdentidad(documentoDeIdentidad)).thenReturn(true);
+        assertThrows(() -> servicioCrearPersona.ejecutar(persona), ExcepcionDuplicidad.class,
+                String.format("La persona con %s número %s ya se encuentra registrada", tipo, numero));
+    }
 }

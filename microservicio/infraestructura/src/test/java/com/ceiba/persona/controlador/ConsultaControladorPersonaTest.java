@@ -25,7 +25,7 @@ public class ConsultaControladorPersonaTest {
 
     @Test
     public void consultarListadoDePersonas() throws Exception {
-        mockMvc.perform(get("/personas")
+        mockMvc.perform(get("/personas?numeroRegistroInicial=1&numeroRegistros=10")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

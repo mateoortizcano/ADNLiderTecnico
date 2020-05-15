@@ -16,6 +16,8 @@ import java.util.Optional;
 @Repository
 public class DaoPersonaMySql implements DaoPersona {
 
+    public static final int NUMERO_DE_RESULTADOS_POR_DEFECTO = 100;
+    public static final int NUMERO_REGISTRO_INICIAL_POR_DEFECTO = 0;
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace = "persona", value = "listar")
@@ -28,9 +30,14 @@ public class DaoPersonaMySql implements DaoPersona {
     }
 
     @Override
-    public List<DtoPersona> listar() {
+    public List<DtoPersona> listar(Integer offset, Integer rowCount) {
+        offset = (offset == null) || (offset <= 0) ? NUMERO_REGISTRO_INICIAL_POR_DEFECTO : offset-1;
+        rowCount = (rowCount == null) || (rowCount < 0) ? NUMERO_DE_RESULTADOS_POR_DEFECTO : rowCount;
+        MapSqlParameterSource parametrosSql = new MapSqlParameterSource();
+        parametrosSql.addValue("offset", offset);
+        parametrosSql.addValue("row_count", rowCount);
         return customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(
-                sqlListar, new MapeadorPersona());
+                sqlListar, parametrosSql, new MapeadorPersona());
     }
 
     @Override

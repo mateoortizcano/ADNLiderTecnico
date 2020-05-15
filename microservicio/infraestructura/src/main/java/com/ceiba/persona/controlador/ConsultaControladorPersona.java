@@ -23,8 +23,9 @@ public class ConsultaControladorPersona {
     }
 
     @GetMapping
-    public List<DtoPersona> listarTodos() {
-        return manejadorListarPersonas.ejecutar();
+    public List<DtoPersona> listarTodos(@RequestParam("numeroRegistroInicial") Integer numeroRegistroInicial,
+                                        @RequestParam("numeroRegistros") Integer numeroRegistros) {
+        return manejadorListarPersonas.ejecutar(numeroRegistroInicial, numeroRegistros);
     }
 
     @GetMapping("/{numeroDocumento}")

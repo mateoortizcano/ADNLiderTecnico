@@ -26,7 +26,7 @@ public class RepositorioPersonaMySql implements RepositorioPersona {
     }
 
     @Override
-    public boolean buscarPorDocumentoDeIdentidad(DocumentoDeIdentidad documentoDeIdentidad) {
+    public boolean existeConDocumentoDeIdentidad(DocumentoDeIdentidad documentoDeIdentidad) {
         MapSqlParameterSource parametrosSql = new MapSqlParameterSource();
         parametrosSql.addValue(TIPO_DOCUMENTO, documentoDeIdentidad.getTipo());
         parametrosSql.addValue(NUMERO_DOCUMENTO, documentoDeIdentidad.getNumero());

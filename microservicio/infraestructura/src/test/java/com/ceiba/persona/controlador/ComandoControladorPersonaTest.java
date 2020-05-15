@@ -53,7 +53,7 @@ public class ComandoControladorPersonaTest {
     }
 
     private boolean existePersona(String numeroIdentificacion, String tipoIdentificacion) {
-        return repositorioPersona.buscarPorDocumentoDeIdentidad(
+        return repositorioPersona.existeConDocumentoDeIdentidad(
                 new DocumentoDeIdentidad(tipoIdentificacion, numeroIdentificacion));
     }
 }

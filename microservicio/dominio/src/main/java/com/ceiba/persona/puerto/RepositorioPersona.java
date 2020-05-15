@@ -10,7 +10,7 @@ public interface RepositorioPersona {
      * @param documentoDeIdentidad
      * @return
      */
-    boolean buscarPorDocumentoDeIdentidad(DocumentoDeIdentidad documentoDeIdentidad);
+    boolean existeConDocumentoDeIdentidad(DocumentoDeIdentidad documentoDeIdentidad);
 
     /**
      * Permite crear personas
